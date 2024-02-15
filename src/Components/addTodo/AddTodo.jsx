@@ -1,10 +1,8 @@
-import { useContext, useState } from "react";
-import TodoDispatchContext from "../../Context/TodoDispatchContext";
+import { useState } from "react";
 
-function AddTodo(){
+function AddTodo({addTodo}){
 
     const [inputText , setInputText] = useState(''); //This is the inputText hooks which is used to enter the name of TodoTask
-    const {dispatch} = useContext(TodoDispatchContext);
     return (
 
         <div>
@@ -16,7 +14,7 @@ function AddTodo(){
             />
 
             <button onClick={() =>{
-                dispatch({type : 'add_todo' , payload : {todoText : inputText}});
+                addTodo(inputText);
                 setInputText('');
             }}>Add</button> {/* This is a callback function which used to update the updateList props with parameter input text */}
             

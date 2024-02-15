@@ -1,24 +1,21 @@
 //It handles multiple todo pages based on their id and set todoData too.
 import Todo from "../todo/Todo";
-import TodoContext from "../../Context/TodoContext";
-import { useContext } from "react";
-import TodoDispatchContext from "../../Context/TodoDispatchContext";
+import { useSelector } from "react-redux";
 
-function TodoList(){ //here a list props is passed in parameter of the TodoList
-    const {list} = useContext(TodoContext);
-    const {dispatch} = useContext(TodoDispatchContext);
+function TodoList({editTodo , deleteTodo , todoFinished}){ //here a list props is passed in parameter of the TodoList
+    const list = useSelector((state) => state.todo);
 
     function onFinished(todo , isFinished){
-        dispatch({type : 'finish_todo' , payload : {todo , isFinished : isFinished}})
+        todoFinished(todo , isFinished);
     }
 
     function onDelete(todo){
-        dispatch({type : 'delete_todo' , payload : {todo}})
+        deleteTodo(todo);
         
     }
 
     function onEdit(todo , todoText){
-        dispatch({type : 'edit_todo' , payload : {todo , todoText}})
+        editTodo(todo , todoText);
     }
     return(
         <div>
